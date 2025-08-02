@@ -1,0 +1,37 @@
+<div *ngIf="dataLoaded==false" class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+</div>
+<!-- Yukarıdaki *ngIf sayesinde dataLoaded değeri false ise
+yukarıdaki div gösterilecek, bu div de yükleniyor imajı veriyor 
+-->
+<div class="mb-3">
+  <label for="fiterProductName" class="form-label">Ürün Ara</label>
+  <input type="text" [(ngModel)]="fiterProductName" class="form-control" id="fiterProductName" placeholder="Ürün Adı Giriniz.."> <!-- Çift taraflı veri bağlama-->
+</div>
+<div *ngIf="fiterProductName" class="alert alert-primary">
+    Aradığınız Kelime : {{fiterProductName}}
+</div>
+<table class="table table-bordered">
+
+    <thead *ngIf="dataLoaded==true"> <!-- veri yüklendiyse tabloyu göster -->
+        <th>Id</th>
+        <th>Ürüm Adı</th>
+        <th>Kategori</th>
+        <th>Fiyat</th>
+        <th>KDV'li Fiyat</th>
+        <th>Stok Adedi</th>
+    </thead>
+
+    <tr *ngFor="let product of products">
+        <td>{{product.productId}}</td>
+        <td>{{product.productName}}</td>
+        <td>{{product.categoryId}}</td>
+        <td>{{product.unitPrice | currency}}</td>
+        <td>{{product.unitPrice | vatAdded:10 | currency}}</td> 
+        <!--
+        unitPrice için 2 tane pipe kullanıyoruz. vatAdded pipe'nu kullanırken parametre olara 10 gönderiyoruz
+        yapmak istediğimiz %10 KDV'li fiyatını hesaplamak. Sonrasıda dolar sembolü için currenct pipe'nı kullanıyoruz
+        -->
+        <td>{{product.unitsInStock}}</td>
+    </tr>
+</table>

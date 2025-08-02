@@ -1,0 +1,18 @@
+<ul class="list-group">
+  <li (click)="getAllCategory()" routerLink="/products" [class]="getAllCategoryClass()">
+    Tüm Ürünler
+  </li>
+  <li (click)="getCurrentCategory(category)" [class]="getCurrentCategoryClass(category)" 
+  routerLink="/products/category/{{category.categoryId}}"
+  *ngFor="let category of categories">
+    {{category.categoryName | uppercase}} <!--categoryName verisini dönüştürmeye yarayan upperCase pipe'nı kullandık-->
+  </li>
+  <!--
+  foreach() 'den dönen her category'e tıklanınca getCurrentCategory() metoduna parametre olarak o anki category'yi ver
+  böylelikle seçilen category'i alabileceğiz.
+
+  [class] ile veri bağlama türlerinden biridir ve buradaki CSS değeri olan class değeri componentten gelen değerle belirleniyor
+ 
+  -->
+</ul>
+<h1 *ngIf="currentCategory">{{currentCategory.categoryName}} seçtiniz</h1> <!-- category tanımlıysa-->
