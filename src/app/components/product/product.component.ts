@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/app/models/products';
 import { ProductService } from 'src/app/sevices/product.service';
 @Component({
@@ -12,7 +13,9 @@ export class ProductComponent implements OnInit {
   products: Product[] = [];
   dataLoaded: boolean = false;
   fiterProductName: string = "";
-  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute)//Angular bizim yerimize DI yapıyor
+  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute
+    ,private toastrService:ToastrService
+  )//Angular bizim yerimize DI yapıyor
   { }
   /*
   ActivatedRoute → Aktif route'u temsil eder, yani o anki URL adresine ait bilgileri taşır.
@@ -54,6 +57,11 @@ export class ProductComponent implements OnInit {
       this.dataLoaded = true;
       console.log("api request bitti")
     })
+  }
+
+  addToCart(product: Product) {
+    this.toastrService.success("Başarıyla Sepete Eklendi",product.productName);
+    console.log(product);
   }
 
 }
