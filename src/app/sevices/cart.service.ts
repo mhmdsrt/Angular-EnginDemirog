@@ -15,21 +15,35 @@ export class CartService {
   quantity(miktar) değerini 1 arttır eğer yoksa CartItems dizisine ekle
    */
   addToCart(_product: Product) {
-    let cartItem  = CartItems.find(cartItem => {
-      cartItem.product.productId === _product.productId
+    let cartItem = CartItems.find(cartItem => {
+      return cartItem.product.productId === _product.productId // süslü parantez actıgımız için return etmek zorunda kaldık
     })
-    if (cartItem) {
+    if (cartItem != null) {
       cartItem.quantity += 1;
     }
     else {
       let _cartItem = new CartItem();
-      _cartItem.quantity=1;
-      _cartItem.product=_product;
+      _cartItem.quantity = 1;
+      _cartItem.product = _product;
       CartItems.push(_cartItem);
     }
   }
 
-  getCartItemsList():CartItem[]{
+  getCartItemsList(): CartItem[] {
     return CartItems;
+  }
+
+  removeCardFromCarItemsList(_product: Product) {
+    let cartItem = CartItems.find(cartItem=>cartItem.product.productId === _product.productId);
+    if(cartItem!==null){
+      CartItems.splice(CartItems.indexOf(cartItem),1);
+    }
+    /*
+    splice(startIndex, deleteCount)
+    startIndex: Nereden başlayacağını belirtir
+    deleteCount: Kaç eleman sileceğini belirtir
+
+    indexOf() metodu, JavaScript/TypeScript’te bir dizide belirli bir elemanın ilk geçtiği index’i döner. Eğer eleman dizide yoksa -1 döner.
+     */
   }
 }

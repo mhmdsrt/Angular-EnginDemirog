@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/app/models/products';
+import { CartService } from 'src/app/sevices/cart.service';
 import { ProductService } from 'src/app/sevices/product.service';
 @Component({
   selector: 'app-product',
@@ -14,7 +15,7 @@ export class ProductComponent implements OnInit {
   dataLoaded: boolean = false;
   fiterProductName: string = "";
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute
-    ,private toastrService:ToastrService
+    , private toastrService: ToastrService, private cartService: CartService
   )//Angular bizim yerimize DI yapıyor
   { }
   /*
@@ -60,7 +61,8 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart(product: Product) {
-    this.toastrService.success("Başarıyla Sepete Eklendi",product.productName);
+    this.cartService.addToCart(product);
+    this.toastrService.success("Başarıyla Sepete Eklendi", product.productName);
     console.log(product);
   }
 

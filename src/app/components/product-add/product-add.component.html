@@ -1,0 +1,50 @@
+<div class="content">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Ürün Ekle</h5>
+                <div class="card-body">
+                    <form [formGroup]="productAddForm">
+
+                        <div class="mb-3">
+                            <label for="productName">Ürün Adı</label>
+                            <div class="form-group">
+                                <input type="text" id="productName" formControlName="productName" placeholder="Ürün Adı"
+                                    class="form-control" /> <!-- Binding işlemi formControlName ile yapılıyor  -->
+                            </div>
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoryId">Kategori</label>
+                            <div class="form-group">
+                                <input type="number" id="categoryId" formControlName="categoryId" placeholder="Kategori"
+                                    class="form-control" /> <!-- Binding işlemi formControlName ile yapılıyor  -->
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="unitsInStock">Stok Miktarı</label>
+                            <div class="form-group">
+                                <input type="number" id="unitsInStock" formControlName="unitsInStock"
+                                    placeholder="Stok Miktarı" class="form-control" />
+                                <!-- Binding işlemi formControlName ile yapılıyor  -->
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="unitPrice">Birim Fiyatı</label>
+                            <div class="form-group">
+                                <input type="number" id="unitPrice" formControlName="unitPrice"
+                                    placeholder="Birim Fiyatı" class="form-control" />
+                                <!-- Binding işlemi formControlName ile yapılıyor  -->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="button" (click)="addProduct()" class="btn btn-success">Ekle</button>
+        </div>
+    </div>
+</div>
